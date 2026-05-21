@@ -1,8 +1,9 @@
 const express = require("express");
 const { EventModel } = require("../models/Event.model");
+const authJWT = require("../middlewares/auth.middleware");
 const eventRouter = express.Router();
 
-eventRouter.post("/", async (req, res) => {
+eventRouter.post("/",authJWT, async (req, res) => {
     try {
         const { title, description, shortDescription, date, location } = req.body;
         if (!title || !description || !shortDescription || !date || !location) {
@@ -32,7 +33,7 @@ eventRouter.get("/", async (req, res) => {
     }
 })
 
-eventRouter.delete("/:id", async (req, res) => {
+eventRouter.delete("/:id",authJWT, async (req, res) => {
     try {
         const id = req.params.id;
         const findId = await EventModel.findById(id);
@@ -47,7 +48,7 @@ eventRouter.delete("/:id", async (req, res) => {
     }
 })
 
-eventRouter.patch("/:id", async (req, res) => {
+eventRouter.patch("/:id",authJWT, async (req, res) => {
     try {
         const id = req.params.id;
         const findId = await EventModel.findById(id);

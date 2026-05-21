@@ -1,8 +1,9 @@
 const express = require("express");
 const { TeacherModel } = require("../models/Teacher.model");
+const authJWT = require("../middlewares/auth.middleware");
 const teacherRouter = express.Router();
 
-teacherRouter.post("/", async (req,res)=>{
+teacherRouter.post("/",authJWT, async (req,res)=>{
     try{
         const {name,designation,bio,image,subject} = req.body;
         if(!name || !designation || !bio || !image || !subject){
@@ -19,7 +20,7 @@ teacherRouter.post("/", async (req,res)=>{
     }
 })
 
-teacherRouter.get("/", async (req,res)=>{
+teacherRouter.get("/",authJWT, async (req,res)=>{
     try {
         const data = await TeacherModel.find({});
         if (data.length === 0) {
@@ -32,7 +33,7 @@ teacherRouter.get("/", async (req,res)=>{
     }
 })
 
-teacherRouter.delete("/:id", async (req, res) => {
+teacherRouter.delete("/:id",authJWT, async (req, res) => {
     try {
         const id = req.params.id;
         const findId = await TeacherModel.findById(id);
@@ -47,7 +48,7 @@ teacherRouter.delete("/:id", async (req, res) => {
     }
 })
 
-teacherRouter.patch("/:id", async (req, res) => {
+teacherRouter.patch("/:id",authJWT, async (req, res) => {
     try {
         const id = req.params.id;
         const findId = await TeacherModel.findById(id);

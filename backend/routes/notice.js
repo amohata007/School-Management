@@ -1,8 +1,9 @@
 const express = require("express");
 const { NoticeModel } = require("../models/Notice.model");
+const authJWT = require("../middlewares/auth.middleware");
 const noticeRouter = express.Router();
 
-noticeRouter.post("/", async (req, res) => {
+noticeRouter.post("/",authJWT, async (req, res) => {
     try {
         const { title, description, date, category } = req.body;
         if (!title || !description || !date || !category) {
@@ -32,7 +33,7 @@ noticeRouter.get("/", async (req, res) => {
     }
 })
 
-noticeRouter.delete("/:id", async (req, res) => {
+noticeRouter.delete("/:id",authJWT, async (req, res) => {
     try {
         const id = req.params.id;
         const findId = await NoticeModel.findById(id);
@@ -47,7 +48,7 @@ noticeRouter.delete("/:id", async (req, res) => {
     }
 })
 
-noticeRouter.patch("/:id", async (req, res) => {
+noticeRouter.patch("/:id",authJWT, async (req, res) => {
     try {
         const id = req.params.id;
         const findId = await NoticeModel.findById(id);

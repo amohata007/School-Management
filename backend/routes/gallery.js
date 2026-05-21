@@ -1,8 +1,9 @@
 const express = require("express");
 const { GalleryModel } = require("../models/Gallery.model");
+const authJWT = require("../middlewares/auth.middleware");
 const galleryRouter = express.Router();
 
-galleryRouter.post("/", async (req, res) => {
+galleryRouter.post("/",authJWT, async (req, res) => {
     try {
         const { title, imageUrl, date } = req.body;
         if (!title || !imageUrl || !date) {
@@ -32,7 +33,7 @@ galleryRouter.get("/", async (req, res) => {
     }
 })
 
-galleryRouter.delete("/:id", async (req, res) => {
+galleryRouter.delete("/:id",authJWT, async (req, res) => {
     try {
         const id = req.params.id;
         const findId = await GalleryModel.findById(id);
@@ -47,7 +48,7 @@ galleryRouter.delete("/:id", async (req, res) => {
     }
 })
 
-galleryRouter.patch("/:id", async (req, res) => {
+galleryRouter.patch("/:id",authJWT, async (req, res) => {
     try {
         const id = req.params.id;
         const findId = await GalleryModel.findById(id);

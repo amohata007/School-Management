@@ -1,5 +1,6 @@
 const express = require("express");
 const { ContactModel } = require("../models/Contact.model");
+const authJWT = require("../middlewares/auth.middleware");
 const contactRouter = express.Router();
 
 contactRouter.post("/", async (req, res) => {
@@ -19,11 +20,11 @@ contactRouter.post("/", async (req, res) => {
     }
 })
 
-contactRouter.get("/", async (req, res) => {
+contactRouter.get("/",authJWT, async (req, res) => {
     try {
         const data = await ContactModel.find({});
         if (data.length === 0) {
-            return res.status(400).json({ status: "Y", message: "No data found..!!" })
+            return res.status(400).json({ status: "N", message: "No data found..!!" })
         }
         res.status(200).json({ status: "Y", data: data })
     }
@@ -32,7 +33,7 @@ contactRouter.get("/", async (req, res) => {
     }
 })
 
-contactRouter.delete("/:id", async (req, res) => {
+contactRouter.delete("/:id",authJWT, async (req, res) => {
     try {
         const id = req.params.id;
         const findId = await ContactModel.findById(id);

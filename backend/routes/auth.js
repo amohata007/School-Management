@@ -46,7 +46,7 @@ userRoute.post("/login", async(req,res)=>{
         if(!checkPassword){
             return res.status(400).json({status:"N",message:"Invalid crendentials..!!"})
         }
-        const token = jwt.sign({id:isEmailExist._id,email:isEmailExist.email},process.env.JWT_SECRET,{
+        const token = jwt.sign({id:isEmailExist._id,email:isEmailExist.email, name:isEmailExist.name},process.env.JWT_SECRET,{
                 expiresIn: "1d"
             })
         return res.status(200).json({status:"Y",message:"Successfully LoggedIn..!!",token, user:{id: isEmailExist._id, name: isEmailExist.name, email: isEmailExist.email}})
