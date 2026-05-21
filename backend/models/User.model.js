@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
-        validate = (value) => {
+        validate : (value) => {
             if (!validator.isEmail(value)) {
                 throw new Error("Please enter correct email..!!");
             }
@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
-        validate = (value) => {
+        validate : (value) => {
             if (!validator.isStrongPassword(value)) {
                 throw new Error("Please enter strong password..!!");
             }

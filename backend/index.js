@@ -15,13 +15,20 @@ app.use(cors());
 
 //Routes
 const contactRoutes = require("./routes/contact");
+const eventRoutes = require("./routes/event");
+const galleryRouter = require("./routes/gallery");
+const noticeRouter = require("./routes/notice");
+const teacherRouter = require("./routes/teacher");
+const userRoute = require("./routes/auth");
 
 //Using Routes
 app.use("/api/contact", contactRoutes);
+app.use("/api/event", eventRoutes);
+app.use("/api/gallery", galleryRouter);
+app.use("/api/notice", noticeRouter);
+app.use("/api/teacher", teacherRouter);
+app.use("/api/user", userRoute);
 
-app.get("/",(req,res)=>{
-    res.send("Hello from the server");
-})
 
 dbConnect()
     .then(() => {
