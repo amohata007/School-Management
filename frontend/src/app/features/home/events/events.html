@@ -13,11 +13,15 @@
         onmouseout="this.start();"
       >
         <div class="fs-6">
-          <span
-            ><strong class="text-danger">Function:</strong> Annual Sports Day!
-          </span>
-          <span><strong>Date:</strong> 25th November 2025 </span>
-          <span><strong>Location:</strong> School Playground</span>
+          <a style="text-decoration: none; color: inherit;" routerLink="/events">
+          @for (event of events; track event._id){
+            <span
+              ><strong class="text-danger"> Function:</strong> {{event.title}}
+            </span>
+            <span><strong>Date:</strong> {{event.date | date}} </span>
+            <span><strong>Location:</strong> {{event.location}} </span>
+          }
+          </a>
         </div></marquee
       >
     </div>

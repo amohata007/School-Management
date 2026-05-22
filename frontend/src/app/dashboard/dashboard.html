@@ -5,7 +5,7 @@
   <div class="row align-items-center mb-4">
     <div class="col-sm-2 text-end fw-semibold">Select Dashboard:</div>
     <div class="col-sm-3">
-      <select class="form-select" id="dashboardSelect">
+      <select class="form-select" id="dashboardSelect" [(ngModel)]="selectedMenu">
         <option value="contact">Contact Dashboard</option>
         <option value="events">Events Dashboard</option>
         <option value="gallery">Gallery Dashboard</option>
@@ -17,8 +17,24 @@
   </div>
   <div class="row">
     <div class="col-12">
-      <div id="contactDashboard">
-        <app-teachers-dashboard></app-teachers-dashboard>
+      <div>
+        @switch(selectedMenu){
+           @case('contact'){
+            <app-contact-dashboard></app-contact-dashboard>
+           }
+           @case('events'){
+            <app-events-dashboard></app-events-dashboard>
+           }
+           @case('gallery'){
+            <app-gallery-dashboard></app-gallery-dashboard>
+           }
+           @case('teachers'){
+            <app-teachers-dashboard></app-teachers-dashboard>
+           }
+           @case('notices'){
+            <app-notice-dashboard></app-notice-dashboard>
+           }
+        }
       </div>
     </div>
   </div>
