@@ -16,4 +16,8 @@ export class Api {
   getEvents(){
     return this._http.get(`${environment.apiUrl}/event`)
   }
+
+  getGallery(){
+    return this._http.get(`${environment.apiUrl}/gallery`)
+  }
 }

@@ -6,4 +6,8 @@ import { Component } from '@angular/core';
   templateUrl: './gallery.html',
   styleUrl: './gallery.scss',
 })
-export class Gallery {}
+export class Gallery {
+  ngOnInit(){
+    window.scrollTo(0,0)
+  }
+}
